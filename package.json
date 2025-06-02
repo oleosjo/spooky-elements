@@ -1,0 +1,28 @@
+{
+  "name": "halloween-story-collector",
+  "version": "1.0.0",
+  "description": "Halloween story prompt collector with random generator",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "keywords": [
+    "halloween",
+    "stories",
+    "express",
+    "node"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

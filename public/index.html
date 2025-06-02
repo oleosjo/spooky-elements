@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎃 Halloween Story Prompts</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b3d 50%, #0f0519 100%);
+            min-height: 100vh;
+            font-family: "Apple Chancery", "Brush Script MT", cursive;
+            color: #f4a261;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .card {
+            background: linear-gradient(145deg, rgba(45, 27, 61, 0.9), rgba(26, 11, 46, 0.9));
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                inset 0 1px rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(244, 162, 97, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(244, 162, 97, 0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .title {
+            font-family: 'Creepster', cursive;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #f4a261, #e76f51, #f4a261);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(231, 111, 81, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(231, 111, 81, 0.5); }
+            to { text-shadow: 0 0 30px rgba(231, 111, 81, 0.8), 0 0 40px rgba(244, 162, 97, 0.3); }
+        }
+        
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e9c46a;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: normal;
+            color: #f4a261;
+            font-size: 1.1rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(244, 162, 97, 0.3);
+            border-radius: 12px;
+            background: rgba(26, 11, 46, 0.6);
+            color: #f4a261;
+            font-size: 1rem;
+            font-family: "Apple Chancery", "Brush Script MT", cursive;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #e76f51;
+            box-shadow: 0 0 15px rgba(231, 111, 81, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: rgba(244, 162, 97, 0.6);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #e76f51, #f4a261);
+            color: #1a0b2e;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: normal;
+            font-family: "Apple Chancery", "Brush Script MT", cursive;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(231, 111, 81, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            color: #27ae60;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .floating-pumpkin {
+            position: fixed;
+            font-size: 2rem;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        .spooky-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #e76f51;
+            text-align: center;
+            margin: 20px 0;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-pumpkin" style="top: 10%; left: 10%;">🎃</div>
+    <div class="floating-pumpkin" style="top: 20%; right: 15%; animation-delay: -2s;">👻</div>
+    <div class="floating-pumpkin" style="bottom: 30%; left: 20%; animation-delay: -4s;">🦇</div>
+    <div class="floating-pumpkin" style="top: 60%; right: 10%; animation-delay: -1s;">🕷️</div>
+    
+    <div class="container">
+        <div class="card">
+            <!-- Login Screen -->
+            <div id="loginScreen">
+                <h1 class="title">🎃 Spooky Elements</h1>
+                <p class="subtitle">Enter the haunted realm...</p>
+                
+                <!-- Final Elements Display (when locked) -->
+                <div id="finalElementsDisplay" class="hidden" style="background: rgba(231, 111, 81, 0.2); padding: 25px; border-radius: 15px; margin: 25px 0; border: 2px solid rgba(231, 111, 81, 0.6);">
+                    <h2 style="color: #e76f51; text-align: center; margin-bottom: 20px; font-family: 'Creepster', cursive; font-size: 2rem;">🎭 The Final Elements 🎭</h2>
+                    <div id="finalElementsContent"></div>
+                    <p style="text-align: center; margin-top: 20px; font-style: italic; color: #e9c46a;">The element collection is complete. No more entries may be submitted.</p>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button type="button" id="adminOnlyBtn" class="btn" style="background: linear-gradient(45deg, #8e44ad, #9b59b6); max-width: 300px;">
+                            Admin Portal Only 🔮
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="spooky-text">⚰️ Only those with the sacred code may enter ⚰️</div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="accessCode">Access Code:</label>
+                        <input type="password" id="accessCode" placeholder="Enter the secret code..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userName">Select Your Name:</label>
+                        <select id="userName" required>
+                            <option value="">Choose your identity...</option>
+                            <option value="Sarah">Sarah</option>
+                            <option value="Mike">Mike</option>
+                            <option value="Emma">Emma</option>
+                            <option value="David">David</option>
+                            <option value="Lisa">Lisa</option>
+                            <option value="Alex">Alex</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Enter the Darkness 🕯️</button>
+                    <button type="button" id="adminLoginBtn" class="btn" style="margin-top: 15px; background: linear-gradient(45deg, #8e44ad, #9b59b6);">
+                        Admin Portal 🔮
+                    </button>
+                    <div id="loginError" class="error"></div>
+                </form>
+            </div>
+            
+            <!-- Element Submission Screen -->
+            <div id="elementScreen" class="hidden">
+                <h1 class="title">👻 Element Creation</h1>
+                <p class="subtitle">Craft your tale of terror...</p>
+                <div class="spooky-text">🕸️ Three elements to weave your nightmare 🕸️</div>
+                
+                <div id="welcomeMessage" class="success"></div>
+                
+                <form id="elementForm">
+                    <div class="form-group">
+                        <label for="location">🏚️ Spooky Location:</label>
+                        <input type="text" id="location" placeholder="Haunted mansion, cursed cemetery, abandoned hospital..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="character">👤 Mysterious Character:</label>
+                        <input type="text" id="character" placeholder="Ghostly figure, mad scientist, ancient witch..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="item">🔮 Cursed Item:</label>
+                        <input type="text" id="item" placeholder="Enchanted mirror, old diary, glowing amulet..." required>
+                    </div>
+                    
+                    <button type="submit" class="btn">Seal Your Elements 📜</button>
+                    <div id="elementError" class="error"></div>
+                </form>
+                
+                <button id="logoutBtn" class="btn" style="margin-top: 20px; background: linear-gradient(45deg, #6c757d, #495057);">
+                    Return to the Shadows 🌙
+                </button>
+            </div>
+            
+            <!-- View Existing Elements Screen -->
+            <div id="viewElementsScreen" class="hidden">
+                <h1 class="title">📖 Your Elements</h1>
+                <p class="subtitle">Your contribution to the grimoire...</p>
+                <div class="spooky-text">🦇 You have already sealed your fate 🦇</div>
+                
+                <div id="existingElementsDisplay" style="background: rgba(26, 11, 46, 0.8); padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid rgba(244, 162, 97, 0.3);"></div>
+                
+                <button id="viewLogoutBtn" class="btn" style="background: linear-gradient(45deg, #6c757d, #495057);">
+                    Return to the Shadows 🌙
+                </button>
+            </div>btn" style="margin-top: 15px; background: linear-gradient(45deg, #8e44ad, #9b59b6);">
+                        Admin Portal 🔮
+                    </button>
+                    <div id="loginError" class="error"></div>
+                </form>
+            </div>
+            
+            <!-- Story Form Screen -->
+            <div id="storyScreen" class="hidden">
+                <h1 class="title">👻 Story Elements</h1>
+                <p class="subtitle">Craft your tale of terror...</p>
+                <div class="spooky-text">🕸️ Three elements to weave your nightmare 🕸️</div>
+                
+                <div id="welcomeMessage" class="success"></div>
+                
+                <form id="storyForm">
+                    <div class="form-group">
+                        <label for="location">🏚️ Spooky Location:</label>
+                        <input type="text" id="location" placeholder="Haunted mansion, cursed cemetery, abandoned hospital..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="character">👤 Mysterious Character:</label>
+                        <input type="text" id="character" placeholder="Ghostly figure, mad scientist, ancient witch..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="item">🔮 Cursed Item:</label>
+                        <input type="text" id="item" placeholder="Enchanted mirror, old diary, glowing amulet..." required>
+                    </div>
+                    
+                    <button type="submit" class="btn">Seal Your Story 📜</button>
+                    <div id="storyError" class="error"></div>
+                </form>
+                
+                <button id="logoutBtn" class="btn" style="margin-top: 20px; background: linear-gradient(45deg, #6c757d, #495057);">
+                    Return to the Shadows 🌙
+                </button>
+            </div>
+            
+            <!-- Success Screen -->
+            <div id="successScreen" class="hidden">
+                <h1 class="title">✨ Story Sealed!</h1>
+                <p class="subtitle">Your tale has been added to the grimoire...</p>
+                <div class="spooky-text">🦉 The spirits have accepted your offering 🦉</div>
+                
+                <div id="submittedStory" style="background: rgba(26, 11, 46, 0.8); padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid rgba(244, 162, 97, 0.3);"></div>
+                
+                <button id="newStoryBtn" class="btn">Conjure Another Tale 🎭</button>
+                <button id="finalLogoutBtn" class="btn" style="margin-top: 15px; background: linear-gradient(45deg, #6c757d, #495057);">
+                    Leave the Realm 🚪
+                </button>
+            </div>
+            
+            <!-- Admin Screen -->
+            <div id="adminScreen" class="hidden">
+                <h1 class="title">🔮 Admin Portal</h1>
+                <p class="subtitle">Master of the dark arts...</p>
+                <div class="spooky-text">⚡ Control the fate of all stories ⚡</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 30px 0;">
+                    <button id="generateStoryBtn" class="btn">Generate Random Story 🎲</button>
+                    <button id="viewAllStoriesBtn" class="btn">View All Stories 📚</button>
+                    <button id="exportCsvBtn" class="btn">Export CSV 📊</button>
+                    <button id="resetStoriesBtn" class="btn" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">Reset All 💀</button>
+                </div>
+                
+                <div id="randomStoryResult" class="hidden" style="background: rgba(26, 11, 46, 0.8); padding: 20px; border-radius: 12px; margin: 20px 0; border: 2px solid rgba(231, 111, 81, 0.5);">
+                    <h3 style="color: #e76f51; margin-bottom: 15px; text-align: center;">🎭 The Fates Have Chosen</h3>
+                    <div id="randomStoryContent"></div>
+                    <button id="generateAnotherBtn" class="btn" style="margin-top: 15px;">Generate Another 🔄</button>
+                </div>
+                
+                <div id="allStoriesResult" class="hidden" style="background: rgba(26, 11, 46, 0.8); padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid rgba(244, 162, 97, 0.3); max-height: 400px; overflow-y: auto;">
+                    <h3 style="color: #e76f51; margin-bottom: 15px;">📖 All Submitted Stories</h3>
+                    <div id="allStoriesContent"></div>
+                </div>
+                
+                <button id="adminLogoutBtn" class="btn" style="margin-top: 20px; background: linear-gradient(45deg, #6c757d, #495057);">
+                    Return to Mortal Realm 🌙
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add debugging and ensure DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing app');
+            
+            // API base URL
+            const API_BASE = 'http://localhost:3000/api';
+            
+            // Current user
+            let currentUser = '';
+            
+            // DOM elements
+            const loginScreen = document.getElementById('loginScreen');
+            const storyScreen = document.getElementById('storyScreen');
+            const successScreen = document.getElementById('successScreen');
+            const adminScreen = document.getElementById('adminScreen');
+            const loginForm = document.getElementById('loginForm');
+            const storyForm = document.getElementById('storyForm');
+            const loginError = document.getElementById('loginError');
+            const storyError = document.getElementById('storyError');
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            
+            // Check app status on load
+            checkAppStatus();
+        
+        // Helper function to format dates in a human-readable way
+        function formatHumanDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+            
+            // If it's today
+            if (diffDays === 0) {
+                if (diffMins < 1) return 'Just now';
+                if (diffMins < 60) return `${diffMins} minute${diffMins === 1 ? '' : 's'} ago`;
+                if (diffHours < 24) return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
+            }
+            
+            // If it's recent
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            
+            // For older dates, show a nice format
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            };
+            
+            return date.toLocaleDateString('en-US', options);
+        }
+        async function checkAppStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/status`);
+                const status = await response.json();
+                
+                if (status.isLocked && status.finalStory) {
+                    displayFinalStoryOnMain(status.finalStory);
+                } else {
+                    document.getElementById('finalStoryDisplay').classList.add('hidden');
+                    document.getElementById('loginForm').classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error checking app status:', error);
+            }
+        }
+        
+        // Display final story on main page
+        function displayFinalStoryOnMain(finalStory) {
+            const displayDiv = document.getElementById('finalStoryDisplay');
+            const contentDiv = document.getElementById('finalStoryContent');
+            const loginForm = document.getElementById('loginForm');
+            
+            contentDiv.innerHTML = `
+                <div style="display: grid; gap: 15px;">
+                    <div style="padding: 15px; background: rgba(26, 11, 46, 0.6); border-radius: 8px; border-left: 4px solid #e76f51;">
+                        <strong>🏚️ Location:</strong> ${finalStory.location.text}
+                        <div style="font-size: 0.9rem; color: #e9c46a; margin-top: 5px;">Contributed by: ${finalStory.location.user}</div>
+                    </div>
+                    <div style="padding: 15px; background: rgba(26, 11, 46, 0.6); border-radius: 8px; border-left: 4px solid #f4a261;">
+                        <strong>👤 Character:</strong> ${finalStory.character.text}
+                        <div style="font-size: 0.9rem; color: #e9c46a; margin-top: 5px;">Contributed by: ${finalStory.character.user}</div>
+                    </div>
+                    <div style="padding: 15px; background: rgba(26, 11, 46, 0.6); border-radius: 8px; border-left: 4px solid #e9c46a;">
+                        <strong>🔮 Item:</strong> ${finalStory.item.text}
+                        <div style="font-size: 0.9rem; color: #e9c46a; margin-top: 5px;">Contributed by: ${finalStory.item.user}</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: #e9c46a;">
+                    Tale sealed: ${formatHumanDate(finalStory.generatedAt)}
+                </div>
+            `;
+            
+            displayDiv.classList.remove('hidden');
+            loginForm.classList.add('hidden'); // Hide the login form when story is locked
+        }
+        // Login handler
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            console.log('Login form submitted');
+            
+            const accessCode = document.getElementById('accessCode').value;
+            const userName = document.getElementById('userName').value;
+            
+            console.log('Access code:', accessCode);
+            console.log('User name:', userName);
+            
+            if (!userName) {
+                loginError.textContent = '❌ You must choose your identity to proceed...';
+                return;
+            }
+            
+            // Validate access code and check user via API
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        accessCode: accessCode,
+                        userName: userName
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    if (response.status === 423) {
+                        // App is locked
+                        loginError.textContent = `❌ ${data.error}`;
+                        if (data.finalStory) {
+                            displayFinalStoryOnMain(data.finalStory);
+                        }
+                        return;
+                    }
+                    loginError.textContent = `❌ ${data.error}`;
+                    return;
+                }
+                
+                currentUser = userName;
+                loginError.textContent = '';
+                welcomeMessage.textContent = `🎭 Welcome, ${userName}... The darkness awaits your story.`;
+                
+                showScreen('story');
+                
+            } catch (error) {
+                console.error('Error during login:', error);
+                loginError.textContent = '❌ Connection error. Try again...';
+            }
+        });
+        
+        // Story form handler
+        storyForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const location = document.getElementById('location').value.trim();
+            const character = document.getElementById('character').value.trim();
+            const item = document.getElementById('item').value.trim();
+            
+            if (!location || !character || !item) {
+                storyError.textContent = '❌ All elements are required to complete the ritual...';
+                return;
+            }
+            
+            // Submit to backend
+            try {
+                const response = await fetch(`${API_BASE}/stories`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user: currentUser,
+                        location: location,
+                        character: character,
+                        item: item
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to submit story');
+                }
+                
+                storyError.textContent = '';
+                
+                // Show success screen
+                displaySubmittedStory(data.story);
+                showScreen('success');
+                
+            } catch (error) {
+                console.error('Error submitting story:', error);
+                storyError.textContent = `❌ ${error.message}`;
+            }
+        });
+        
+        // Admin login handler for locked state
+        document.getElementById('adminOnlyBtn').addEventListener('click', async function() {
+            const accessCode = prompt('Enter admin access code:');
+            
+            if (!accessCode) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/admin`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        accessCode: accessCode
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    alert(`❌ ${data.error}`);
+                    return;
+                }
+                
+                showScreen('admin');
+                
+            } catch (error) {
+                console.error('Error during admin login:', error);
+                alert('❌ Connection error. Try again...');
+            }
+        });
+        document.getElementById('adminLoginBtn').addEventListener('click', async function() {
+            const accessCode = document.getElementById('accessCode').value;
+            
+            if (!accessCode) {
+                loginError.textContent = '❌ Enter access code first...';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/admin`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        accessCode: accessCode
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    loginError.textContent = `❌ ${data.error}`;
+                    return;
+                }
+                
+                loginError.textContent = '';
+                showScreen('admin');
+                
+            } catch (error) {
+                console.error('Error during admin login:', error);
+                loginError.textContent = '❌ Connection error. Try again...';
+            }
+        });
+        
+        // Admin logout handler
+        document.getElementById('adminLogoutBtn').addEventListener('click', function() {
+            logout();
+        });
+        
+        // Generate random story
+        document.getElementById('generateStoryBtn').addEventListener('click', generateRandomStory);
+        document.getElementById('generateAnotherBtn').addEventListener('click', generateRandomStory);
+        
+        async function generateRandomStory() {
+            try {
+                const response = await fetch(`${API_BASE}/stories/random`);
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to generate story');
+                }
+                
+                const resultDiv = document.getElementById('randomStoryResult');
+                const contentDiv = document.getElementById('randomStoryContent');
+                
+                contentDiv.innerHTML = `
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h4 style="color: #f4a261; margin-bottom: 15px;">✨ Your Random Halloween Story Elements ✨</h4>
+                    </div>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="padding: 15px; background: rgba(231, 111, 81, 0.2); border-radius: 8px; border-left: 4px solid #e76f51;">
+                            <strong>🏚️ Location:</strong> ${data.location.text}
+                            <div style="font-size: 0.9rem; color: #e9c46a; margin-top: 5px;">Contributed by: ${data.location.user}</div>
+                        </div>
+                        <div style="padding: 15px; background: rgba(244, 162, 97, 0.2); border-radius: 8px; border-left: 4px solid #f4a261;">
+                            <strong>👤 Character:</strong> ${data.character.text}
+                            <div style="font-size: 0.9rem; color: #e9c46a; margin-top: 5px;">Contributed by: ${data.character.user}</div>
+                        </div>
+                        <div style="padding: 15px; background: rgba(233, 196, 106, 0.2); border-radius: 8px; border-left: 4px solid #e9c46a;">
+                            <strong>🔮 Item:</strong> ${data.item.text}
+                            <div style="font-size: 0.9rem; color: #e9c46a; margin-top: 5px;">Contributed by: ${data.item.user}</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #e9c46a;">
+                        Generated: ${formatHumanDate(data.generatedAt)}
+                    </div>
+                `;
+                
+                resultDiv.classList.remove('hidden');
+                document.getElementById('allStoriesResult').classList.add('hidden');
+            } catch (error) {
+                console.error('Error generating random story:', error);
+                alert(`Error: ${error.message}`);
+            }
+        }
+        
+        // View all stories
+        document.getElementById('viewAllStoriesBtn').addEventListener('click', async function() {
+            try {
+                const response = await fetch(`${API_BASE}/stories`);
+                const stories = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch stories');
+                }
+                
+                const resultDiv = document.getElementById('allStoriesResult');
+                const contentDiv = document.getElementById('allStoriesContent');
+                
+                if (stories.length === 0) {
+                    contentDiv.innerHTML = '<p style="text-align: center; color: #e9c46a;">No stories have been submitted yet...</p>';
+                } else {
+                    contentDiv.innerHTML = stories.map(story => `
+                        <div style="margin-bottom: 20px; padding: 15px; background: rgba(45, 27, 61, 0.6); border-radius: 8px; border: 1px solid rgba(244, 162, 97, 0.3);">
+                            <h4 style="color: #e76f51; margin-bottom: 10px;">${story.user}'s Story</h4>
+                            <p><strong>🏚️ Location:</strong> ${story.location}</p>
+                            <p><strong>👤 Character:</strong> ${story.character}</p>
+                            <p><strong>🔮 Item:</strong> ${story.item}</p>
+                            <p style="font-size: 0.8rem; color: #e9c46a; margin-top: 10px;">Submitted: ${formatHumanDate(story.timestamp)}</p>
+                        </div>
+                    `).join('');
+                }
+                
+                resultDiv.classList.remove('hidden');
+                document.getElementById('randomStoryResult').classList.add('hidden');
+            } catch (error) {
+                console.error('Error fetching stories:', error);
+                alert(`Error: ${error.message}`);
+            }
+        });
+        
+        // Export CSV
+        document.getElementById('exportCsvBtn').addEventListener('click', function() {
+            window.open(`${API_BASE}/stories/export/csv`, '_blank');
+        });
+        
+                // Reset all stories
+        document.getElementById('resetStoriesBtn').addEventListener('click', async function() {
+            if (!confirm('Are you sure you want to delete ALL stories? This action cannot be undone!')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/stories`, {
+                    method: 'DELETE'
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to reset stories');
+                }
+                
+                alert('All stories have been deleted and app reset successfully!');
+                
+                // Hide results
+                document.getElementById('randomStoryResult').classList.add('hidden');
+                document.getElementById('allStoriesResult').classList.add('hidden');
+                
+                // Check status to update main page
+                checkAppStatus();
+            } catch (error) {
+                console.error('Error resetting stories:', error);
+                alert(`Error: ${error.message}`);
+            }
+        });
+        
+        // Logout handlers
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            logout();
+        });
+        
+        document.getElementById('finalLogoutBtn').addEventListener('click', function() {
+            logout();
+        });
+        
+        // New story handler
+        document.getElementById('newStoryBtn').addEventListener('click', function() {
+            // Reset form
+            storyForm.reset();
+            showScreen('story');
+        });
+        
+        function showScreen(screen) {
+            loginScreen.classList.add('hidden');
+            storyScreen.classList.add('hidden');
+            successScreen.classList.add('hidden');
+            adminScreen.classList.add('hidden');
+            
+            switch(screen) {
+                case 'login':
+                    loginScreen.classList.remove('hidden');
+                    break;
+                case 'story':
+                    storyScreen.classList.remove('hidden');
+                    break;
+                case 'success':
+                    successScreen.classList.remove('hidden');
+                    break;
+                case 'admin':
+                    adminScreen.classList.remove('hidden');
+                    break;
+            }
+        }
+        
+        function logout() {
+            // Reset forms
+            loginForm.reset();
+            storyForm.reset();
+            
+            // Clear messages
+            loginError.textContent = '';
+            storyError.textContent = '';
+            welcomeMessage.textContent = '';
+            
+            currentUser = '';
+            showScreen('login');
+        }
+        
+        function displaySubmittedStory(story) {
+            const storyDisplay = document.getElementById('submittedStory');
+            storyDisplay.innerHTML = `
+                <h3 style="color: #e76f51; margin-bottom: 15px;">📖 ${story.user}'s Dark Tale</h3>
+                <p><strong>🏚️ Location:</strong> ${story.location}</p>
+                <p><strong>👤 Character:</strong> ${story.character}</p>
+                <p><strong>🔮 Item:</strong> ${story.item}</p>
+                <p style="font-size: 0.9rem; color: #e9c46a; margin-top: 10px;">⏰ Sealed: ${formatHumanDate(story.timestamp)}</p>
+            `;
+        }
+        
+        // Add some spooky sound effects on interactions (optional)
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn')) {
+                // You could add sound effects here if desired
+                e.target.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    e.target.style.transform = '';
+                }, 100);
+            }
+        });
+        
+        }); // End of DOMContentLoaded
+    </script>
+</body>
+</html>

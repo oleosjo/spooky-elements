@@ -1,0 +1,4 @@
+node_modules/
+elements.json
+app_state.json
+.env
