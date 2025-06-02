@@ -3,14 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2d1b3d" />
     <title>🎃 Spooky Story Elements Collector</title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Creepster&family=Pirata+One&display=swap");
 
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+      }
+
+      html {
+        height: 100%;
+        /* Fix for Safari mobile viewport issues */
+        height: -webkit-fill-available;
       }
 
       body {
@@ -20,13 +27,19 @@
           #2d1b3d 50%,
           #0f0519 100%
         );
+        /* Ensure background covers the full height */
         min-height: 100vh;
-        font-family: "Apple Chancery", "Brush Script MT", cursive;
+        min-height: -webkit-fill-available;
+        font-family: "Pirata One", sans-serif;
         color: #f4a261;
         overflow-x: hidden;
         position: relative;
+        /* Force hardware acceleration on mobile */
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
       }
 
+      /* Simplified background overlay for better mobile compatibility */
       body::before {
         content: "";
         position: fixed;
@@ -34,6 +47,7 @@
         left: 0;
         width: 100%;
         height: 100%;
+        height: -webkit-fill-available;
         background-image:
           radial-gradient(
             circle at 20% 80%,
@@ -47,6 +61,8 @@
           );
         pointer-events: none;
         z-index: -1;
+        /* Ensure it's rendered */
+        will-change: transform;
       }
 
       .container {
@@ -54,26 +70,35 @@
         margin: 0 auto;
         padding: 20px;
         min-height: 100vh;
+        min-height: -webkit-fill-available;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        /* Add safe area padding for newer iPhones */
+        padding-top: max(20px, env(safe-area-inset-top));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
       }
 
       .card {
         background: linear-gradient(
           145deg,
-          rgba(45, 27, 61, 0.9),
-          rgba(26, 11, 46, 0.9)
+          rgba(45, 27, 61, 0.95),
+          rgba(26, 11, 46, 0.95)
         );
         border-radius: 20px;
-        padding: 40px;
+        padding: 20px;
         box-shadow:
           0 20px 40px rgba(0, 0, 0, 0.5),
           inset 0 1px rgba(255, 255, 255, 0.1);
         border: 2px solid rgba(244, 162, 97, 0.3);
         backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         position: relative;
         overflow: hidden;
+        /* Ensure card has a solid background fallback */
+        background-color: rgba(45, 27, 61, 0.95);
       }
 
       .card::before {
@@ -90,6 +115,8 @@
           transparent
         );
         animation: shimmer 3s infinite;
+        /* Improve performance on mobile */
+        will-change: transform;
       }
 
       @keyframes shimmer {
@@ -112,6 +139,8 @@
         background-clip: text;
         text-shadow: 0 0 20px rgba(231, 111, 81, 0.5);
         animation: glow 2s ease-in-out infinite alternate;
+        /* Fallback for browsers that don't support background-clip */
+        color: #f4a261;
       }
 
       @keyframes glow {
@@ -155,12 +184,12 @@
         padding: 15px;
         border: 2px solid rgba(244, 162, 97, 0.3);
         border-radius: 12px;
-        background: rgba(26, 11, 46, 0.6);
+        background: rgba(26, 11, 46, 0.8);
         color: #f4a261;
         font-size: 1rem;
-        font-family: "Apple Chancery", "Brush Script MT", cursive;
+        font-family: sans-serif;
         transition: all 0.3s ease;
-        backdrop-filter: blur(5px);
+        /* Removed backdrop-filter for better mobile compatibility */
       }
 
       input:focus,
@@ -186,13 +215,16 @@
         border-radius: 12px;
         font-size: 1.2rem;
         font-weight: normal;
-        font-family: "Apple Chancery", "Brush Script MT", cursive;
+        font-family: "Pirata One", sans-serif;
         cursor: pointer;
         transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 1px;
         position: relative;
         overflow: hidden;
+        /* Improve touch handling on mobile */
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
       }
 
       .btn:hover {
@@ -248,6 +280,8 @@
         z-index: -1;
         animation: float 6s ease-in-out infinite;
         opacity: 0.1;
+        /* Improve performance */
+        will-change: transform;
       }
 
       @keyframes float {
@@ -282,6 +316,9 @@
         font-size: 1.2rem;
         color: rgba(244, 162, 97, 0.7);
         z-index: 10;
+        /* Improve touch handling */
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
       }
 
       .admin-cog.hidden {
@@ -293,15 +330,53 @@
           font-size: 2rem;
         }
         .card {
-          padding: 30px 20px;
-          margin: 10px;
+          padding: 30px 10px;
+          /* margin: 10px; */
+          /* Ensure solid background on mobile */
+          background: rgba(45, 27, 61, 0.98);
         }
         .admin-cog {
-          top: 10px;
-          right: 10px;
-          width: 30px;
-          height: 30px;
-          font-size: 1rem;
+          top: 11px;
+          right: 11px;
+          width: 10px;
+          height: 10px;
+          font-size: 0.8rem;
+        }
+
+        /* Mobile-specific improvements */
+        input,
+        select,
+        textarea {
+          font-size: 16px; /* Prevents zoom on iOS */
+          background: rgba(26, 11, 46, 0.95);
+        }
+
+        /* Reduce animations on mobile for better performance */
+        .card::before {
+          animation: none;
+        }
+
+        .floating-pumpkin {
+          animation-duration: 8s; /* Slower animation */
+        }
+      }
+
+      /* iOS specific fixes */
+      @supports (-webkit-touch-callout: none) {
+        body {
+          /* iOS Safari specific height fix */
+          min-height: -webkit-fill-available;
+        }
+
+        .container {
+          min-height: -webkit-fill-available;
+        }
+
+        /* Disable backdrop-filter on older iOS versions */
+        .card {
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+          background: rgba(45, 27, 61, 0.98);
         }
       }
     </style>
@@ -373,7 +448,7 @@
           </div>
 
           <div id="sacredCodeMsg" class="spooky-text">
-            ⚰️ Only those with the sacred code may enter ⚰️
+            🗝️ Only those with the sacred code may enter
           </div>
 
           <form id="loginForm">
@@ -409,17 +484,17 @@
 
           <form id="elementForm">
             <div class="form-group">
-              <label for="location">🏚️ Spooky Location:</label>
+              <label for="location">🗺️ Location:</label>
               <input type="text" id="location" placeholder="" required />
             </div>
 
             <div class="form-group">
-              <label for="character">👤 Mysterious Character:</label>
+              <label for="character">👤 Character:</label>
               <input type="text" id="character" placeholder="" required />
             </div>
 
             <div class="form-group">
-              <label for="item">🔮 Cursed Item:</label>
+              <label for="item">🔮 Item:</label>
               <input type="text" id="item" placeholder="" required />
             </div>
 
