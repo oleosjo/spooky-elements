@@ -75,10 +75,10 @@
         flex-direction: column;
         justify-content: center;
         /* Add safe area padding for newer iPhones */
-        padding-top: max(20px, env(safe-area-inset-top));
-        padding-bottom: max(20px, env(safe-area-inset-bottom));
-        padding-left: max(20px, env(safe-area-inset-left));
-        padding-right: max(20px, env(safe-area-inset-right));
+        padding-top: max(10px, env(safe-area-inset-top));
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
       }
 
       .card {
@@ -88,7 +88,7 @@
           rgba(26, 11, 46, 0.95)
         );
         border-radius: 20px;
-        padding: 20px;
+        padding: 40px;
         box-shadow:
           0 20px 40px rgba(0, 0, 0, 0.5),
           inset 0 1px rgba(255, 255, 255, 0.1);
@@ -330,8 +330,7 @@
           font-size: 2rem;
         }
         .card {
-          padding: 30px 10px;
-          /* margin: 10px; */
+          padding: 20px;
           /* Ensure solid background on mobile */
           background: rgba(45, 27, 61, 0.98);
         }
