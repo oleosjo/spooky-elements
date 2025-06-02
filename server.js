@@ -2,21 +2,30 @@ const express = require("express");
 const fs = require("fs").promises;
 const path = require("path");
 const cors = require("cors");
+require("dotenv").config(); // Add this line
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, "elements.json");
 const STATE_FILE = path.join(__dirname, "app_state.json");
 
-// SECURE ACCESS CODES - Store these securely, not in frontend!
+// SECURE ACCESS CODES - Must be set in environment variables
+if (!process.env.USER_CODE || !process.env.ADMIN_CODE) {
+  console.error(
+    "❌ FATAL: USER_CODE and ADMIN_CODE environment variables must be set!",
+  );
+  console.error("📋 Create a .env file with:");
+  console.error("   USER_CODE=your_secret_user_code");
+  console.error("   ADMIN_CODE=your_secret_admin_code");
+  process.exit(1);
+}
+
 const ACCESS_CODES = {
-  SPOOKY2024: "user",
-  HALLOWEEN: "user",
-  GHOSTLY: "user",
-  PUMPKIN123: "user",
-  ADMIN_PORTAL: "admin", // Special admin code
-  MASTER_KEY: "admin", // Backup admin code
+  [process.env.USER_CODE]: "user",
+  [process.env.ADMIN_CODE]: "admin",
 };
+
+console.log("🔐 Access codes loaded securely from environment variables");
 
 // Middleware
 app.use(cors());
@@ -404,9 +413,19 @@ async function startServer() {
     );
     console.log(`📁 Elements will be saved to: ${DATA_FILE}`);
     console.log(`📋 App state will be saved to: ${STATE_FILE}`);
-    console.log(`🔐 Access codes configured securely on backend`);
-    console.log(`👑 Admin codes: ADMIN_PORTAL, MASTER_KEY`);
-    console.log(`👤 User codes: SPOOKY2024, HALLOWEEN, GHOSTLY, PUMPKIN123`);
+    console.log(`🔐 Access codes configured securely from environment`);
+
+    // Only show codes in development
+    if (process.env.NODE_ENV !== "production") {
+      const userCode = Object.keys(ACCESS_CODES).find(
+        (key) => ACCESS_CODES[key] === "user",
+      );
+      const adminCode = Object.keys(ACCESS_CODES).find(
+        (key) => ACCESS_CODES[key] === "admin",
+      );
+      console.log(`👑 Admin code: ${adminCode}`);
+      console.log(`👤 User code: ${userCode}`);
+    }
   });
 }
 
